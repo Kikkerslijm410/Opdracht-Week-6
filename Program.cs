@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+var computer = Environment.MachineName;
+//DESKTOP-6PE5SC4\\SQLEXPRESS01
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SchoolContext>(options =>
+    options.UseSqlite("Server=" + computer + "\\SQLEXPRESS01;Initial Catalog=Test;Integrated Security=true"));
 
 // Add services to the container.
 
