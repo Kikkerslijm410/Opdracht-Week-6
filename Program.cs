@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-var computer = Environment.MachineName;
-//DESKTOP-6PE5SC4\\SQLEXPRESS01
+// Database
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SchoolContext>(options =>
-    options.UseSqlite("Server=" + computer + "\\SQLEXPRESS01;Initial Catalog=Test;Integrated Security=true"));
+    options.UseSqlite("Data source = MijnAPI.sqlite"));
 
 // Add services to the container.
-
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<SchoolContext>()
+                .AddDefaultTokenProviders();
+builder.Services.AddAuthentication();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -30,3 +33,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+app.UseAuthentication();
+

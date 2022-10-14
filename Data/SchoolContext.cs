@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using api;
 
-    public class SchoolContext : DbContext{
+    public class SchoolContext : IdentityDbContext{
         
         public SchoolContext (DbContextOptions<SchoolContext> options): base(options){
         }
