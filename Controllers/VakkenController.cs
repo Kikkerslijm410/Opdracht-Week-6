@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using api;
 
 namespace Opdracht_Week_6.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VakkenController : ControllerBase
-    {
+    public class VakkenController : ControllerBase{
         private readonly SchoolContext _context;
 
         public VakkenController(SchoolContext context)
@@ -32,6 +32,7 @@ namespace Opdracht_Week_6.Controllers
         }
 
         // GET: api/Vakken/5
+        [Authorize] // Cookies dont work but they are delicious
         [HttpGet("{id}")]
         public async Task<ActionResult<Vak>> GetVak(int id)
         {

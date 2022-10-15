@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Opdracht_Week_6.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    [Migration("20221014085625_2")]
-    partial class _2
+    [Migration("20221014124952_One")]
+    partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,12 @@ namespace Opdracht_Week_6.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Bouwjaar")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Engheid")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Naam")

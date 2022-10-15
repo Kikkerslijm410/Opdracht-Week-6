@@ -22,6 +22,12 @@ namespace Opdracht_Week_6.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Bouwjaar")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Engheid")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Naam")
                         .IsRequired()
                         .HasColumnType("TEXT");
