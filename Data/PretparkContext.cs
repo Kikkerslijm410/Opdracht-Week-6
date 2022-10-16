@@ -32,6 +32,7 @@ protected override void OnModelCreating(ModelBuilder builder)
                     .HasForeignKey("AttractieId")
                     .HasConstraintName("FK_Likes_Attracties_AttractieId")
                     .OnDelete(DeleteBehavior.ClientCascade));
+                    
         builder.Entity<IdentityRole>().HasData(new IdentityRole(){Name = "Medewerker", NormalizedName = "MEDEWERKER"});
         builder.Entity<IdentityRole>().HasData(new IdentityRole(){Name = "Gebruiker", NormalizedName = "GEBRUIKER"});
     }

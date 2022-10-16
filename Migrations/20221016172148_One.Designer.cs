@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Opdracht_Week_6.Migrations
 {
     [DbContext(typeof(PretparkContext))]
-    [Migration("20221016153415_One")]
+    [Migration("20221016172148_One")]
     partial class One
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,15 +82,15 @@ namespace Opdracht_Week_6.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0f00679b-eec1-4382-b760-8a2b83884ea1",
-                            ConcurrencyStamp = "a1cee56e-7b69-4fe3-b1f1-d4cf7a8814be",
+                            Id = "c4db6b62-9ae5-4032-9395-465464419530",
+                            ConcurrencyStamp = "e51b83d9-0be0-4f88-aac9-8005ea7dbb11",
                             Name = "Medewerker",
                             NormalizedName = "MEDEWERKER"
                         },
                         new
                         {
-                            Id = "5a18a1c2-ddc8-4439-8f8d-431a9a1b2784",
-                            ConcurrencyStamp = "b9759154-66f0-43cb-8d26-a2bfb7b4db7f",
+                            Id = "f5287347-17cb-455e-b883-73fae6e90f27",
+                            ConcurrencyStamp = "4109660f-7749-4036-80b4-e8e8cbbbfcff",
                             Name = "Gebruiker",
                             NormalizedName = "GEBRUIKER"
                         });
@@ -273,7 +273,6 @@ namespace Opdracht_Week_6.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("password")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("Gebruiker");
@@ -344,25 +343,6 @@ namespace Opdracht_Week_6.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("api.Gebruiker", b =>
-                {
-                    b.OwnsOne("api.Geslacht", "geslacht", b1 =>
-                        {
-                            b1.Property<string>("GebruikerId")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("GebruikerId");
-
-                            b1.ToTable("AspNetUsers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("GebruikerId");
-                        });
-
-                    b.Navigation("geslacht")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

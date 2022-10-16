@@ -11,7 +11,7 @@ builder.Services.AddDbContext<PretparkContext>(options =>
     options.UseSqlite("Data source = MijnAPI.sqlite"));
 
 // Add services to the container.
-builder.Services.AddIdentity<Gebruiker, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<PretparkContext>()
                 .AddDefaultTokenProviders();
                 

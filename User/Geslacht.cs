@@ -1,8 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace api;
 
-[Microsoft.EntityFrameworkCore.Owned]
+[Owned]
 public class Geslacht{
-    public string geslacht;
+    public string geslacht = "Onbekend";
     public void SetGeslacht (string g){
         if (g == null || (g != "Man" && g != "Vrouw" && g != "Anders")){
             geslacht = "Onbekend";

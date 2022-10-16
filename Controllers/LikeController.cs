@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using api;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -15,7 +16,7 @@ public class LikeController : ControllerBase{
         _userManager = usermanager;
     }
 
-    [HttpPost("{id}"), Authorize (Roles ="Gast")]
+    [HttpPost("{id}"), Authorize (Roles ="Gebruiker")]
     public async Task<ActionResult<List<Gebruiker>>> GetLike(int id){
         if (_context.Attractie == null){
             return NotFound();
@@ -43,12 +44,27 @@ public class LikeController : ControllerBase{
         return attractie.GLikes;
     }
 
-    // [HttpGet, Authorize ("Gast")]
-    // public async Task<ActionResult<List<Attractie>>> GetAllLikedAttractions(){
-    // }
+    [HttpGet, Authorize(Roles = "Gebruiker")]
+    public async Task<ActionResult<IEnumerable<Attractie>>> GetLikedAttractions(){
+        var HuidigeGebruiker = await _context.Gebruiker.Include("LikedAttractions").SingleOrDefaultAsync(g => g.UserName == getUserName());
+        if(HuidigeGebruiker !=null){
+            if(!await _userManager.IsInRoleAsync(HuidigeGebruiker, "Medewerker")){
+                return HuidigeGebruiker.GelikteAttracties.ToList();
+            }
+        }
+        return NotFound();
+    }
 
     //needs testing
     private string getUserName(){
-        return User.Identity.Name;
+        //return User.Identity.Name;
+        Request.Headers.TryGetValue("Authorization", out var headervalue);
+        string cleanToken = headervalue.ToString().Substring(7);
+        var handler = new JwtSecurityTokenHandler();
+        var jsonToken = handler.ReadToken(cleanToken);
+        var Token = jsonToken as JwtSecurityToken;
+        string[] loggedInUserDisgusting = Token.Claims.ToList()[0].ToString().Split(": ");
+        string loggedInUser = loggedInUserDisgusting[1];
+        return loggedInUser;
     }
 }

@@ -13,7 +13,7 @@ public class AttractieController : ControllerBase{
     }
 
     // GET: api/Attractie
-    [HttpGet]
+    [HttpGet, Authorize(Roles = "Medewerker")]
     public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractie(){
         if (_context.Attractie == null)
         {
@@ -25,7 +25,7 @@ public class AttractieController : ControllerBase{
     // ADD here all filters
 
     // GET: api/Attractie/5
-    [HttpGet("{id}")]
+    [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
     public async Task<ActionResult<Attractie>> GetAttractie(int id){
         if (_context.Attractie == null){
             return NotFound();
@@ -38,7 +38,7 @@ public class AttractieController : ControllerBase{
     }
 
     // PUT: api/Attractie/5
-    [HttpPut("{id}")]
+    [HttpPut("{id}"), Authorize(Roles = "Medewerker")]
     public async Task<IActionResult> PutAttractie(int id, Attractie attractie){
         if (id != attractie.Id){
             return BadRequest();
@@ -59,7 +59,7 @@ public class AttractieController : ControllerBase{
     }
 
     // POST: api/Attractie
-    [HttpPost]
+    [HttpPost, Authorize(Roles = "Medewerker")]
     public async Task<ActionResult<Attractie>> PostAttractie(Attractie attractie){
         if (_context.Attractie == null){
             return Problem("Entity set 'SchoolContext.Attractie' is null.");
@@ -70,7 +70,7 @@ public class AttractieController : ControllerBase{
     }
 
     // DELETE: api/Attractie/5
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}"), Authorize(Roles = "Medewerker")]
     public async Task<IActionResult> DeleteAttractie(int id){
         if (_context.Attractie == null){
             return NotFound();

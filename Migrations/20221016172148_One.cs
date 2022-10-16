@@ -197,12 +197,12 @@ namespace Opdracht_Week_6.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0f00679b-eec1-4382-b760-8a2b83884ea1", "a1cee56e-7b69-4fe3-b1f1-d4cf7a8814be", "Medewerker", "MEDEWERKER" });
+                values: new object[] { "c4db6b62-9ae5-4032-9395-465464419530", "e51b83d9-0be0-4f88-aac9-8005ea7dbb11", "Medewerker", "MEDEWERKER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "5a18a1c2-ddc8-4439-8f8d-431a9a1b2784", "b9759154-66f0-43cb-8d26-a2bfb7b4db7f", "Gebruiker", "GEBRUIKER" });
+                values: new object[] { "f5287347-17cb-455e-b883-73fae6e90f27", "4109660f-7749-4036-80b4-e8e8cbbbfcff", "Gebruiker", "GEBRUIKER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
