@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Identity;
 namespace api;
 
 public class Gebruiker : IdentityUser{
-    public string? Gebruikersname {get; set;}
-    public string? Password {get; init;}
-    public Geslacht geslacht {get; set;}
+    public string password {get; init;} = null!;
+    public Geslacht geslacht {get; set;} = null!;
     public List<Attractie> GelikteAttracties =  new List<Attractie>();
 }

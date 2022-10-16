@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using api;
+using Microsoft.AspNetCore.Identity;
 
 public class PretparkContext : IdentityDbContext{
     public PretparkContext (DbContextOptions<PretparkContext> options): base(options){}
@@ -31,8 +32,7 @@ protected override void OnModelCreating(ModelBuilder builder)
                     .HasForeignKey("AttractieId")
                     .HasConstraintName("FK_Likes_Attracties_AttractieId")
                     .OnDelete(DeleteBehavior.ClientCascade));
-
-        builder.Entity<Role>().HasData(new Role(){Name = "Medewerker", NormalizedName = "MEDEWERKER"});
-        builder.Entity<Role>().HasData(new Role(){Name = "Gebruiker", NormalizedName = "GEBRUIKER"});
+        builder.Entity<IdentityRole>().HasData(new IdentityRole(){Name = "Medewerker", NormalizedName = "MEDEWERKER"});
+        builder.Entity<IdentityRole>().HasData(new IdentityRole(){Name = "Gebruiker", NormalizedName = "GEBRUIKER"});
     }
 }

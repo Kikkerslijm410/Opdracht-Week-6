@@ -11,34 +11,28 @@ using Microsoft.AspNetCore.Authorization;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly PretparkContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<Gebruiker> _userManager;
+    private readonly SignInManager<Gebruiker> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, 
-                            SignInManager<IdentityUser> signInManager, 
-                            RoleManager<IdentityRole> roleManager,
-                            PretparkContext context){
+    public AccountController(UserManager<Gebruiker> userManager, 
+                            SignInManager<Gebruiker> signInManager, 
+                            RoleManager<IdentityRole> roleManager){
         _userManager = userManager;
         _signInManager = signInManager;
         _roleManager = roleManager;
-        _context = context;
     }
 
     [HttpPost("registreerGebruiker")]
     public async Task<ActionResult<IEnumerable<Gebruiker>>> RegistreerGebruiker([FromBody] Gebruiker gebruiker){
-        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.Password);
-        var geslacht = await _userManager.CreateAsync(gebruiker, gebruiker.geslacht.geslacht);
+        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.password);
         var role = await _userManager.AddToRoleAsync(gebruiker, "Gebruiker");
         return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
     }
 
-    [HttpPost("registreerMedewerker"), Authorize("Medewerker")]
+    [HttpPost("registreerMedewerker")]
     public async Task<ActionResult<IEnumerable<Gebruiker>>> RegistreerMedewerker([FromBody] Gebruiker gebruiker){
-        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.Password);
-        var geslacht = await _userManager.CreateAsync(gebruiker, gebruiker.geslacht.geslacht);
-        var role = await _userManager.AddToRoleAsync(gebruiker, "Medewerker");
+        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.password);
         return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
     }
 

@@ -11,5 +11,6 @@ public class Attractie{
         
     [NotMapped]
     public int like {get;set;}
+    [NotMapped]
     public List<Gebruiker> GLikes {get;set;} 
 }

@@ -61,10 +61,6 @@ namespace Opdracht_Week_6.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -81,7 +77,21 @@ namespace Opdracht_Week_6.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
+                    b.HasData(
+                        new
+                        {
+                            Id = "0f00679b-eec1-4382-b760-8a2b83884ea1",
+                            ConcurrencyStamp = "a1cee56e-7b69-4fe3-b1f1-d4cf7a8814be",
+                            Name = "Medewerker",
+                            NormalizedName = "MEDEWERKER"
+                        },
+                        new
+                        {
+                            Id = "5a18a1c2-ddc8-4439-8f8d-431a9a1b2784",
+                            ConcurrencyStamp = "b9759154-66f0-43cb-8d26-a2bfb7b4db7f",
+                            Name = "Gebruiker",
+                            NormalizedName = "GEBRUIKER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -260,36 +270,11 @@ namespace Opdracht_Week_6.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Gebruikersname")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("Gebruiker");
-                });
-
-            modelBuilder.Entity("api.Role", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
-
-                    b.HasDiscriminator().HasValue("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "8dfddde7-d632-4f78-abb9-33042f76cc99",
-                            ConcurrencyStamp = "54ef6969-e0b1-4455-9ceb-59e9e880cd1a",
-                            Name = "Medewerker",
-                            NormalizedName = "MEDEWERKER"
-                        },
-                        new
-                        {
-                            Id = "9e551e05-6220-4ccd-ac2c-6e4b57b3f0ea",
-                            ConcurrencyStamp = "b5a23d47-3216-4dd3-9c2e-7076b33f5617",
-                            Name = "Gebruiker",
-                            NormalizedName = "GEBRUIKER"
-                        });
                 });
 
             modelBuilder.Entity("Like", b =>

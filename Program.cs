@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using api;
 
 // Database
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddDbContext<PretparkContext>(options =>
     options.UseSqlite("Data source = MijnAPI.sqlite"));
 
 // Add services to the container.
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<Gebruiker, IdentityRole>()
                 .AddEntityFrameworkStores<PretparkContext>()
                 .AddDefaultTokenProviders();
                 
