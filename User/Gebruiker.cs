@@ -4,6 +4,7 @@ namespace api;
 
 public class Gebruiker : IdentityUser{
     public string? password {get; init;}
+    public Geslacht geslacht {get;set;} = new Geslacht();
     public List<Attractie> GelikteAttracties =  new List<Attractie>();
 }
 
