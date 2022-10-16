@@ -1,53 +1,52 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using api;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-
-public class GebruikerMetWachwoord : IdentityUser{
-    public string? Password {get; init;}
-    public Geslacht geslacht {get; set;}
-}
-
-public class GebruikerLogin{
-    [Required(ErrorMessage = "Username is required")]
-    public string? UserName { get; init; }
-
-    [Required(ErrorMessage = "Password is required")]
-    public string? Password { get; init; }
-}
+using Microsoft.AspNetCore.Authorization;
 
 [Route("api/[controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {
+    private readonly PretparkContext _context;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-    {
+    public AccountController(UserManager<IdentityUser> userManager, 
+                            SignInManager<IdentityUser> signInManager, 
+                            RoleManager<IdentityRole> roleManager,
+                            PretparkContext context){
         _userManager = userManager;
         _signInManager = signInManager;
+        _roleManager = roleManager;
+        _context = context;
     }
 
-    [HttpPost("registreer")]
-    public async Task<ActionResult<IEnumerable<GebruikerMetWachwoord>>> Registreer([FromBody] GebruikerMetWachwoord gebruikerMetWachwoord)
-    {
-        var resultaat = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.Password);
-        var geslacht = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.geslacht.geslacht);
+    [HttpPost("registreerGebruiker")]
+    public async Task<ActionResult<IEnumerable<Gebruiker>>> RegistreerGebruiker([FromBody] Gebruiker gebruiker){
+        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.Password);
+        var geslacht = await _userManager.CreateAsync(gebruiker, gebruiker.geslacht.geslacht);
+        var role = await _userManager.AddToRoleAsync(gebruiker, "Gebruiker");
+        return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
+    }
+
+    [HttpPost("registreerMedewerker"), Authorize("Medewerker")]
+    public async Task<ActionResult<IEnumerable<Gebruiker>>> RegistreerMedewerker([FromBody] Gebruiker gebruiker){
+        var resultaat = await _userManager.CreateAsync(gebruiker, gebruiker.Password);
+        var geslacht = await _userManager.CreateAsync(gebruiker, gebruiker.geslacht.geslacht);
+        var role = await _userManager.AddToRoleAsync(gebruiker, "Medewerker");
         return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] GebruikerLogin gebruikerLogin)
-    {
+    public async Task<IActionResult> Login([FromBody] GebruikerLogin gebruikerLogin){
         var _user = await _userManager.FindByNameAsync(gebruikerLogin.UserName);
         if (_user != null)
-            if (await _userManager.CheckPasswordAsync(_user, gebruikerLogin.Password))
-            {
+            if (await _userManager.CheckPasswordAsync(_user, gebruikerLogin.Password)){
                 var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
                 var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, _user.UserName) };

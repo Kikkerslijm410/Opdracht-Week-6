@@ -8,15 +8,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Opdracht_Week_6.Migrations
 {
-    [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PretparkContext))]
+    partial class PretparkContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.10");
 
-            modelBuilder.Entity("api.Vak", b =>
+            modelBuilder.Entity("api.Attractie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,7 +34,22 @@ namespace Opdracht_Week_6.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vak");
+                    b.ToTable("Attractie");
+                });
+
+            modelBuilder.Entity("Like", b =>
+                {
+                    b.Property<int>("AttractieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("GebruikerId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AttractieId", "GebruikerId");
+
+                    b.HasIndex("GebruikerId");
+
+                    b.ToTable("Like");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -44,6 +59,10 @@ namespace Opdracht_Week_6.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -61,6 +80,8 @@ namespace Opdracht_Week_6.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -96,6 +117,10 @@ namespace Opdracht_Week_6.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -148,6 +173,8 @@ namespace Opdracht_Week_6.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -229,6 +256,59 @@ namespace Opdracht_Week_6.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("api.Gebruiker", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Gebruikersname")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("Gebruiker");
+                });
+
+            modelBuilder.Entity("api.Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8dfddde7-d632-4f78-abb9-33042f76cc99",
+                            ConcurrencyStamp = "54ef6969-e0b1-4455-9ceb-59e9e880cd1a",
+                            Name = "Medewerker",
+                            NormalizedName = "MEDEWERKER"
+                        },
+                        new
+                        {
+                            Id = "9e551e05-6220-4ccd-ac2c-6e4b57b3f0ea",
+                            ConcurrencyStamp = "b5a23d47-3216-4dd3-9c2e-7076b33f5617",
+                            Name = "Gebruiker",
+                            NormalizedName = "GEBRUIKER"
+                        });
+                });
+
+            modelBuilder.Entity("Like", b =>
+                {
+                    b.HasOne("api.Attractie", null)
+                        .WithMany()
+                        .HasForeignKey("AttractieId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Likes_Attracties_AttractieId");
+
+                    b.HasOne("api.Gebruiker", null)
+                        .WithMany()
+                        .HasForeignKey("GebruikerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Likes_Gebruikers_GebruikerId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -277,6 +357,25 @@ namespace Opdracht_Week_6.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("api.Gebruiker", b =>
+                {
+                    b.OwnsOne("api.Geslacht", "geslacht", b1 =>
+                        {
+                            b1.Property<string>("GebruikerId")
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("GebruikerId");
+
+                            b1.ToTable("AspNetUsers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("GebruikerId");
+                        });
+
+                    b.Navigation("geslacht")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

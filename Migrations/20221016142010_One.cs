@@ -14,6 +14,7 @@ namespace Opdracht_Week_6.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
@@ -28,6 +29,9 @@ namespace Opdracht_Week_6.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    Gebruikersname = table.Column<string>(type: "TEXT", nullable: true),
+                    Password = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -49,7 +53,7 @@ namespace Opdracht_Week_6.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vak",
+                name: "Attractie",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -60,7 +64,7 @@ namespace Opdracht_Week_6.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vak", x => x.Id);
+                    table.PrimaryKey("PK_Attractie", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +173,39 @@ namespace Opdracht_Week_6.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Like",
+                columns: table => new
+                {
+                    AttractieId = table.Column<int>(type: "INTEGER", nullable: false),
+                    GebruikerId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Like", x => new { x.AttractieId, x.GebruikerId });
+                    table.ForeignKey(
+                        name: "FK_Likes_Attracties_AttractieId",
+                        column: x => x.AttractieId,
+                        principalTable: "Attractie",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Likes_Gebruikers_GebruikerId",
+                        column: x => x.GebruikerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "8dfddde7-d632-4f78-abb9-33042f76cc99", "54ef6969-e0b1-4455-9ceb-59e9e880cd1a", "Role", "Medewerker", "MEDEWERKER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "9e551e05-6220-4ccd-ac2c-6e4b57b3f0ea", "b5a23d47-3216-4dd3-9c2e-7076b33f5617", "Role", "Gebruiker", "GEBRUIKER" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -205,6 +242,11 @@ namespace Opdracht_Week_6.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Like_GebruikerId",
+                table: "Like",
+                column: "GebruikerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -225,10 +267,13 @@ namespace Opdracht_Week_6.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Vak");
+                name: "Like");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Attractie");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
