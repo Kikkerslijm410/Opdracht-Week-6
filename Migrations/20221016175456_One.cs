@@ -14,6 +14,7 @@ namespace Opdracht_Week_6.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
@@ -196,13 +197,13 @@ namespace Opdracht_Week_6.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c4db6b62-9ae5-4032-9395-465464419530", "e51b83d9-0be0-4f88-aac9-8005ea7dbb11", "Medewerker", "MEDEWERKER" });
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "827e2102-ad6b-4396-9d9f-467d08f158f2", "bc66c27b-1b1b-449a-ba48-e4dc16910deb", "Role", "Gebruiker", "GEBRUIKER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "f5287347-17cb-455e-b883-73fae6e90f27", "4109660f-7749-4036-80b4-e8e8cbbbfcff", "Gebruiker", "GEBRUIKER" });
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
+                values: new object[] { "a26d336b-3604-4962-ae4b-909787fda406", "af3eae77-e000-458a-a1b0-221fceb92f22", "Role", "Medewerker", "MEDEWERKER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

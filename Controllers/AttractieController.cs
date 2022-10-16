@@ -2,14 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using api;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 [Route("api/[controller]")]
 [ApiController]
 public class AttractieController : ControllerBase{
     private readonly PretparkContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public AttractieController(PretparkContext context){
+    public AttractieController(PretparkContext context, UserManager<IdentityUser> userManager)
+    {
         _context = context;
+        _userManager = userManager;
     }
 
     // GET: api/Attractie

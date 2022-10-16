@@ -61,6 +61,10 @@ namespace Opdracht_Week_6.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
@@ -77,21 +81,7 @@ namespace Opdracht_Week_6.Migrations
 
                     b.ToTable("AspNetRoles", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "c4db6b62-9ae5-4032-9395-465464419530",
-                            ConcurrencyStamp = "e51b83d9-0be0-4f88-aac9-8005ea7dbb11",
-                            Name = "Medewerker",
-                            NormalizedName = "MEDEWERKER"
-                        },
-                        new
-                        {
-                            Id = "f5287347-17cb-455e-b883-73fae6e90f27",
-                            ConcurrencyStamp = "4109660f-7749-4036-80b4-e8e8cbbbfcff",
-                            Name = "Gebruiker",
-                            NormalizedName = "GEBRUIKER"
-                        });
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -274,6 +264,29 @@ namespace Opdracht_Week_6.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("Gebruiker");
+                });
+
+            modelBuilder.Entity("api.Role", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.HasDiscriminator().HasValue("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "a26d336b-3604-4962-ae4b-909787fda406",
+                            ConcurrencyStamp = "af3eae77-e000-458a-a1b0-221fceb92f22",
+                            Name = "Medewerker",
+                            NormalizedName = "MEDEWERKER"
+                        },
+                        new
+                        {
+                            Id = "827e2102-ad6b-4396-9d9f-467d08f158f2",
+                            ConcurrencyStamp = "bc66c27b-1b1b-449a-ba48-e4dc16910deb",
+                            Name = "Gebruiker",
+                            NormalizedName = "GEBRUIKER"
+                        });
                 });
 
             modelBuilder.Entity("Like", b =>
