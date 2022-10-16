@@ -1,11 +1,6 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using api;
-using Microsoft.AspNetCore.Identity;
 
 public class PretparkContext : IdentityDbContext{
     public PretparkContext (DbContextOptions<PretparkContext> options): base(options){}

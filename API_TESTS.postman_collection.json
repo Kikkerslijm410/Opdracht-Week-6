@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "25f53dfb-9510-4a71-821e-981c222575ca",
+		"name": "API_TESTS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23873905"
+	},
+	"item": [
+		{
+			"name": "UserTests",
+			"item": [
+				{
+					"name": "RegistreerGebruikerTest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"1\",\r\n  \"userName\": \"Lucas\",\r\n  \"password\": \"Lucas@123\",\r\n  \"geslacht\": {\"geslacht\" : \"Man\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Account/registreerGebruiker",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Account",
+								"registreerGebruiker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RegistreerMedewerkerTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNZWRld2Vya2VyIiwiZXhwIjoxNjY1OTQyNjExLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0IiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCJ9.sb1eJGQaRr8p9FnB0WuZ_4LARpVQJfVqfXAYM8xzwfI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"2\",\r\n  \"userName\": \"Wouter\",\r\n  \"password\": \"Wouter@123\",\r\n  \"geslacht\": {\"geslacht\" : \"man\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Account/registreerMedewerker",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Account",
+								"registreerMedewerker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LoginTest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"Wouter\",\r\n  \"password\": \"Wouter@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AttractieTests",
+			"item": [
+				{
+					"name": "GetAttractieTest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVkZXdlcmtlciIsImV4cCI6MTY2NTk0ODc1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQifQ.fOhqwuos-NBkTCIkvskLOVx_DeUB6z8FqXlv_brEEoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAttractieTest2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVkZXdlcmtlciIsImV4cCI6MTY2NTk0ODc1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQifQ.fOhqwuos-NBkTCIkvskLOVx_DeUB6z8FqXlv_brEEoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostAttractieTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVkZXdlcmtlciIsImV4cCI6MTY2NTk0ODc1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQifQ.fOhqwuos-NBkTCIkvskLOVx_DeUB6z8FqXlv_brEEoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"naam\": \"Draaimolen\",\r\n  \"engheid\": 1,\r\n  \"gLikes\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PutAttractieTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVkZXdlcmtlciIsImV4cCI6MTY2NTk0ODc1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQifQ.fOhqwuos-NBkTCIkvskLOVx_DeUB6z8FqXlv_brEEoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"naam\": \"Achtbaan\",\r\n  \"engheid\": 2,\r\n    \"gLikes\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAttractieTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiV291dGVyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVkZXdlcmtlciIsImV4cCI6MTY2NTk0ODc1MywiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzAxNCIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQifQ.fOhqwuos-NBkTCIkvskLOVx_DeUB6z8FqXlv_brEEoo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LikeTests",
+			"item": [
+				{
+					"name": "GetLikeTest",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHZWJydWlrZXIiLCJleHAiOjE2NjU5NDk4ODgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0In0.ikJ5hhzf8pDfZ-t4FO4ECpw98G2K54EmEQJ_0QWdQH4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Like",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostLikeTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHZWJydWlrZXIiLCJleHAiOjE2NjU5NTAzODAsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0In0.DyyuAN3DgTdLXyl8q-gNNnFf057j20br812iYVJ3tKU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"Lucas\",\r\n  \"password\": \"Lucas@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7014/api/Like/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Like",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

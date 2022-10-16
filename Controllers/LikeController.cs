@@ -21,7 +21,7 @@ public class LikeController : ControllerBase{
         if (_context.Attractie == null){
             return NotFound();
         }
-        var attractie = await _context.Attractie.FindAsync(id);
+        var attractie = await _context.Attractie.Include("GLikes").SingleAsync(i => i.Id.Equals(id));
         if (attractie == null){
             return NotFound();
         }
@@ -46,7 +46,7 @@ public class LikeController : ControllerBase{
 
     [HttpGet, Authorize(Roles = "Gebruiker")]
     public async Task<ActionResult<IEnumerable<Attractie>>> GetLikedAttractions(){
-        var HuidigeGebruiker = await _context.Gebruiker.Include("LikedAttractions").SingleOrDefaultAsync(g => g.UserName == getUserName());
+        var HuidigeGebruiker = await _context.Gebruiker.Include("GelikteAttracties").SingleOrDefaultAsync(g => g.UserName == getUserName());
         if(HuidigeGebruiker !=null){
             if(!await _userManager.IsInRoleAsync(HuidigeGebruiker, "Medewerker")){
                 return HuidigeGebruiker.GelikteAttracties.ToList();
