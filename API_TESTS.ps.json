@@ -401,6 +401,104 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "AttractieFilterTest",
+			"item": [
+				{
+					"name": "FilterBouwjaarTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHZWJydWlrZXIiLCJleHAiOjE2NjU5OTY3NTEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0In0.KpGK4pIFsz0ZY0uuG-VSpUZVynteoV5_ocb5sONxGy4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/Bouwjaar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"Bouwjaar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilterLikeTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHZWJydWlrZXIiLCJleHAiOjE2NjU5OTY3NTEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0In0.KpGK4pIFsz0ZY0uuG-VSpUZVynteoV5_ocb5sONxGy4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/Like",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"Like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FilterEngheidTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiTHVjYXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJHZWJydWlrZXIiLCJleHAiOjE2NjU5OTY2OTYsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTQiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MDE0In0.2FfwMHZH89yQGcPwQoHkdo5RgE9NGB0QFzf0kdYzVQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7014/api/Attractie/Engheid",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7014",
+							"path": [
+								"api",
+								"Attractie",
+								"Engheid"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

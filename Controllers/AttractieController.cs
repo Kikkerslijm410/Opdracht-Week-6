@@ -17,7 +17,7 @@ public class AttractieController : ControllerBase{
     }
 
     // GET: api/Attractie
-    [HttpGet, Authorize(Roles = "Medewerker")]
+    [HttpGet, Authorize(Roles = "Medewerker, Gebruiker")]
     public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractie(){
         if (_context.Attractie == null)
         {
@@ -26,7 +26,32 @@ public class AttractieController : ControllerBase{
         return await _context.Attractie.ToListAsync();
     }
 
-    // ADD here all filters
+    // GET: api/Attractie/Bouwjaar
+    [HttpGet("Bouwjaar"), Authorize(Roles = "Gebruiker")]
+    public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieBouwjaar(){
+        if (_context.Attractie == null){
+            return NotFound();
+        }
+        return await _context.Attractie.OrderByDescending(x => x.Bouwjaar).ToListAsync();
+    }
+    
+    // GET: api/Attractie/Engheid
+    [HttpGet("Engheid"), Authorize(Roles = "Gebruiker")]
+    public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieEngheid(){
+        if (_context.Attractie == null){
+            return NotFound();
+        }
+        return await _context.Attractie.OrderByDescending(x => x.Engheid).ToListAsync();
+    }
+
+    // GET: api/Attractie/Like
+    [HttpGet("Like"), Authorize(Roles = "Gebruiker")]
+    public async Task<ActionResult<IEnumerable<Attractie>>> GetAttractieLikes(){
+        if (_context.Attractie == null){
+            return NotFound();
+        }
+        return await _context.Attractie.OrderByDescending(x => x.GLikes.Count()).ToListAsync();
+    }
 
     // GET: api/Attractie/5
     [HttpGet("{id}"), Authorize(Roles = "Medewerker")]
